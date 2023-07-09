@@ -11,4 +11,6 @@ __pycache__
 **/.venv*/
 **.json
 **.egg-info
+**.idea
+test-output/
 
