@@ -1,0 +1,14 @@
+**/**.txt
+build/
+**.log
+*.pyc
+__pycache__
+**/__pycache__
+**/**/__pycache__
+**/.vscode-test/**
+**/.vscode test/**
+**/.vscode-smoke/**
+**/.venv*/
+**.json
+**.egg-info
+

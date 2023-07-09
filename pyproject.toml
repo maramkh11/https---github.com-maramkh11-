@@ -1,0 +1,13 @@
+[project]
+name= "pytest-selenium-automation-framework"
+description = ""
+dynamic = ["version"]
+requires-python = ">=3.9"
+
+dependencies = [
+    "selenium ~= 4.8.2",
+    "pytest",
+    "allure-pytest",
+    "webdriver-manager",
+    "pytest-asyncio"
+]
