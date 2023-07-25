@@ -6,6 +6,8 @@ from Utilities.pages.customers_page import CustomersPage
 
 
 class CustomersActions(BaseActions):
+    
+    STEP_ID=0
 
     def __init__(self, customers_page: CustomersPage):
         self.customers_page = customers_page
