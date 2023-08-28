@@ -1,11 +1,9 @@
 from enum import Enum
 
 
-class Status(Enum):
-    EQUAL = "equal"
-    NOT_EQUAL = "not equal"
-    CONTAINS = "contains"
-    NOT_CONTAINS = "not contains"
+class Common(Enum):
+    STEP_NUMBER="Step {}:"
+    FAILED=f"{'-'*40} Failed"
 
 
 class Menue(Enum):

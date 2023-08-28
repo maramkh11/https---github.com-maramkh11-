@@ -12,20 +12,29 @@ from selenium.webdriver.chrome.service import Service as ChromeService
 
 T = TypeVar('T')
 
-class WebDriverHelper:
+class WebDriverSingleton:
 
-    def __init__(self,browser_name:str,url=None):   
-        if url:
-            web_driver_url =url 
-            remote_driver = functools.partial(webdriver.Remote, command_executor=web_driver_url)
-            options=self.add_driver_properties(is_dockerized=True)
-            self._web_driver = remote_driver(options=options)
-        else:
-            service = ChromeService(executable_path=ChromeDriverManager().install())
-            options=self.add_driver_properties()
-            self._web_driver  = webdriver.Chrome(service=service,options=options)
+    _instance = None
+
+    def __new__(cls, *args, **kwargs):
+        if not cls._instance:
+            cls._instance = super(WebDriverSingleton, cls).__new__(cls)
+        return cls._instance
+    
+    def __init__(self,browser_name:str,url=None):
+        if not hasattr(self, '_web_driver'):
+            if url:
+                web_driver_url =url 
+                remote_driver = functools.partial(webdriver.Remote, command_executor=web_driver_url)
+                options=self.add_driver_properties(is_dockerized=True)
+                self._web_driver = remote_driver(options=options)
+            else:
+                service = ChromeService(executable_path=ChromeDriverManager().install())
+                options=self.add_driver_properties()
+                self._web_driver  = webdriver.Chrome(service=service,options=options)              
         self._keep_alive_task: Optional[asyncio.Future] = None
  
+
     @property
     def web_driver(self):
         return self._web_driver

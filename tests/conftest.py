@@ -3,7 +3,9 @@ import os
 import shutil
 
 import pytest
-from web.web_driver_helper import WebDriverHelper
+
+from utilities.web.web_driver_helper_singleton import WebDriverSingleton
+
 
 
 @pytest.fixture(scope='session', autouse=True)
@@ -16,7 +18,7 @@ def event_loop():
 async def browser():
     browser_name = os.getenv('Browser')
     url = os.getenv("URL")
-    web_driver_helper = WebDriverHelper(browser_name, url=url)
+    web_driver_helper = WebDriverSingleton(browser_name, url=url)
     try:
         await web_driver_helper.maximize_window()
         await web_driver_helper.get(os.getenv('platform_url'))
